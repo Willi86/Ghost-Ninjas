@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.player-input, .game-area {
+    margin-top: 20px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+input[type="text"] {
+    margin-bottom: 10px;
+    padding: 5px;
+}
