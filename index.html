@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Hänga Gubben</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hänga Gubben</h1>
+        <div class="player-input">
+            <label for="player1">Spelare 1 Namn:</label>
+            <input type="text" id="player1" name="player1">
+            <label for="player2">Spelare 2 Namn:</label>
+            <input type="text" id="player2" name="player2">
+            <button onclick="startGame()">Starta Spelet</button>
+        </div>
+        <div class="game-area" style="display: none;">
+            <h2 id="turn-indicator"></h2>
+            <label for="guess-input">Gissa Bokstav:</label>
+            <input type="text" id="guess-input" name="guess-input">
+            <button onclick="makeGuess()">Gissa</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
