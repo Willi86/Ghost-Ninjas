@@ -1,16 +1,28 @@
 let currentPlayer = 1;
 let player1 = '';
 let player2 = '';
+let word1 = '';
+let word2 = '';
+let guessedLetters1 = [];
+let guessedLetters2 = [];
+let hangmanStatus1 = 0;
+let hangmanStatus2 = 0;
+const maxTries = 6;
 
 function startGame() {
     player1 = document.getElementById('player1').value;
     player2 = document.getElementById('player2').value;
-    if (player1 && player2) {
+    word1 = document.getElementById('word1').value.toLowerCase();
+    word2 = document.getElementById('word2').value.toLowerCase();
+    if (player1 && player2 && word1 && word2) {
         document.querySelector('.player-input').style.display = 'none';
+        document.querySelector('.startGame').style.display = 'none';
         document.querySelector('.game-area').style.display = 'block';
         updateTurnIndicator();
+        updateWordDisplay();
+        updateGuessedLetters();
     } else {
-        alert('Vänligen ange båda spelarnas namn.');
+        alert('Vänligen ange båda spelarnas namn och ord.');
     }
 }
 
@@ -23,17 +35,91 @@ function updateTurnIndicator() {
     }
 }
 
+function updateWordDisplay() {
+    const wordDisplay = document.getElementById('word-display');
+    let displayWord = '';
+    const word = currentPlayer === 1 ? word2 : word1;
+    const guessedLetters = currentPlayer === 1 ? guessedLetters2 : guessedLetters1;
+    for (let letter of word) {
+        displayWord += guessedLetters.includes(letter) ? letter : '_';
+        displayWord += ' ';
+    }
+    wordDisplay.textContent = displayWord.trim();
+}
+
+function updateGuessedLetters() {
+    const guessedLettersDisplay = document.getElementById('guessed-letters');
+    const guessedLetters = currentPlayer === 1 ? guessedLetters2 : guessedLetters1;
+    guessedLettersDisplay.textContent = `Valda bokstäver: ${guessedLetters.join(', ')}`;
+}
+
+function updateHangmanStatus() {
+    const hangmanStatus = document.getElementById('hangman-status');
+    const status1 = `${player1}s gubbe: ${hangmanStatus1}/${maxTries}`;
+    const status2 = `${player2}s gubbe: ${hangmanStatus2}/${maxTries}`;
+    hangmanStatus.textContent = `${status1}\n${status2}`;
+}
+
 function makeGuess() {
-    const guessInput = document.getElementById('guess-input').value;
-    if (guessInput) {
-        // här behöver vi lägga till logik för gissningen
-        console.log(`Spelare ${currentPlayer} gissade: ${guessInput}`);
-        // Byt tur
-        currentPlayer = currentPlayer === 1 ? 2 : 1;
-        updateTurnIndicator();
-        // Rensa inmatningsfältet
-        document.getElementById('guess-input').value = '';
+    const guessInput = document.getElementById('guess-input').value.toLowerCase();
+    if (guessInput && guessInput.length === 1) {
+        const word = currentPlayer === 1 ? word2 : word1;
+        let guessedLetters = currentPlayer === 1 ? guessedLetters2 : guessedLetters1;
+        if (!guessedLetters.includes(guessInput)) {
+            guessedLetters.push(guessInput);
+            if (!word.includes(guessInput)) {
+                if (currentPlayer === 1) {
+                    hangmanStatus2++;
+                } else {
+                    hangmanStatus1++;
+                }
+            }
+            updateHangmanStatus();
+            updateWordDisplay();
+            updateGuessedLetters();
+            if (checkWin(word, guessedLetters)) {
+                alert(`Grattis ${currentPlayer === 1 ? player1 : player2}, du har vunnit!`);
+                resetGame();
+            } else if (hangmanStatus1 >= maxTries || hangmanStatus2 >= maxTries) {
+                alert(`Game over! ${currentPlayer === 1 ? player2 : player1} vann.`);
+                resetGame();
+            } else {
+                currentPlayer = currentPlayer === 1 ? 2 : 1;
+                updateTurnIndicator();
+            }
+            document.getElementById('guess-input').value = '';
+        } else {
+            alert('Den bokstaven har redan valts. Välj en annan bokstav.');
+        }
     } else {
-        alert('Vänligen ange en gissning.');
+        alert('Vänligen ange en giltig bokstav.');
+    }
+}
+
+function checkWin(word, guessedLetters) {
+    for (let letter of word) {
+        if (!guessedLetters.includes(letter)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function resetGame() {
+    currentPlayer = 1;
+    guessedLetters1 = [];
+    guessedLetters2 = [];
+    hangmanStatus1 = 0;
+    hangmanStatus2 = 0;
+    document.querySelector('.player-input').style.display = 'block';
+    document.querySelector('.game-area').style.display = 'none';
+}
+
+function toggleWordVisibility(wordId) {
+    const wordInput = document.getElementById(wordId);
+    if (wordInput.type === 'password') {
+        wordInput.type = 'text';
+    } else {
+        wordInput.type = 'password';
     }
 }

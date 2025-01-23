@@ -2,24 +2,35 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
-    <title>Hänga Gubben</title>
+    <title>Hänga Gubbe</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Hänga Gubben</h1>
+        <h1>Hänga Gubbe</h1>
         <div class="player-input">
             <label for="player1">Spelare 1 Namn:</label>
             <input type="text" id="player1" name="player1">
             <label for="player2">Spelare 2 Namn:</label>
             <input type="text" id="player2" name="player2">
+            <label for="word1">Spelare 1:s Ord för Spelare 2:</label>
+            <input type="password" id="word1" name="word1">
+            <button type="button" onclick="toggleWordVisibility('word1')">Visa</button>
+            <label for="word2">Spelare 2:s Ord för Spelare 1:</label>
+            <input type="password" id="word2" name="word2">
+            <button type="button" onclick="toggleWordVisibility('word2')">Visa</button>
+        </div>
+        <div class="startGame">
             <button onclick="startGame()">Starta Spelet</button>
         </div>
         <div class="game-area" style="display: none;">
             <h2 id="turn-indicator"></h2>
             <label for="guess-input">Gissa Bokstav:</label>
-            <input type="text" id="guess-input" name="guess-input">
+            <input type="text" id="guess-input" name="guess-input" maxlength="1">
             <button onclick="makeGuess()">Gissa</button>
+            <p id="word-display"></p>
+            <p id="guessed-letters"></p>
+            <p id="hangman-status"></p>
         </div>
     </div>
     <script src="script.js"></script>
