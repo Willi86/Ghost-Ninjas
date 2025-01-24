@@ -16,9 +16,11 @@
             <label for="word1">Spelare 1:s Ord för Spelare 2:</label>
             <input type="password" id="word1" name="word1">
             <button type="button" onclick="toggleWordVisibility('word1')">Visa</button>
+            <p id="error-message">Endast bokstäver (inga siffror eller specialtecken) är tillåtna.</p>
             <label for="word2">Spelare 2:s Ord för Spelare 1:</label>
             <input type="password" id="word2" name="word2">
             <button type="button" onclick="toggleWordVisibility('word2')">Visa</button>
+            <p id="error-message">Endast bokstäver (inga siffror eller specialtecken) är tillåtna.</p>
         </div>
         <div class="startGame">
             <button onclick="startGame()">Starta Spelet</button>

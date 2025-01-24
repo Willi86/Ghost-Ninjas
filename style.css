@@ -70,7 +70,46 @@ button:hover {
     color: #ff3333;
     font-weight: bold;
 }
+#error-message{
+    color: red;
+     font-style: italic;
+   display: none;
 
+}
+/* Modal Container */
+#error-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed position (sit on top of everything else) */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+    z-index: 1000; /* Make sure it's on top */
+}
+
+/* Modal Content */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+/* Close Button */
+#close-modal {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
 @media (max-width: 600px) {
     .container {
         width: 100%;

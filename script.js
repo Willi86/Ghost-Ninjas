@@ -14,6 +14,10 @@ function startGame() {
     player2 = document.getElementById('player2').value;
     word1 = document.getElementById('word1').value.toLowerCase();
     word2 = document.getElementById('word2').value.toLowerCase();
+    
+   
+     
+   
     if (player1 && player2 && word1 && word2) {
         document.querySelector('.player-input').style.display = 'none';
         document.querySelector('.startGame').style.display = 'none';
@@ -62,6 +66,15 @@ function updateHangmanStatus() {
 
 function makeGuess() {
     const guessInput = document.getElementById('guess-input').value.toLowerCase();
+    const validLetterRegex = /^[a-zåäö]$/; // Only allow alphabetic characters and Swedish letters
+    
+    console.log("Regex test result:", validLetterRegex.test(guessInput));
+    if (!validLetterRegex.test(guessInput)) {
+        alert ('Ogiltig bokstav! Vänligen ange en giltig bokstav.');
+        document.getElementById('guess-input').value = '';
+        return;
+    } 
+
     if (guessInput && guessInput.length === 1) {
         const word = currentPlayer === 1 ? word2 : word1;
         let guessedLetters = currentPlayer === 1 ? guessedLetters2 : guessedLetters1;
@@ -117,6 +130,18 @@ function resetGame() {
 
 function toggleWordVisibility(wordId) {
     const wordInput = document.getElementById(wordId);
+    const errorMessage = document.getElementById('error-message');
+    const word = wordInput.value.toLowerCase();
+    const validWordRegex = /^[a-zåäö]+$/; 
+
+    if (!validWordRegex.test(word)) {
+       // alert ('Ogiltig bokstav! Vänligen ange en giltig bokstav.');
+        errorMessage.style.display = 'block'; // Show error message if invalid word
+        return
+    } else {
+        errorMessage.style.display = 'none'; // Hide error message if valid word
+    }
+
     if (wordInput.type === 'password') {
         wordInput.type = 'text';
     } else {
