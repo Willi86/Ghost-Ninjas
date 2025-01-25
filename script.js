@@ -83,8 +83,10 @@ function makeGuess() {
             if (!word.includes(guessInput)) {
                 if (currentPlayer === 1) {
                     hangmanStatus2++;
+                    updateHangman(hangmanStatus2);
                 } else {
                     hangmanStatus1++;
+                    updateHangman(hangmanStatus1);
                 }
             }
             updateHangmanStatus();
@@ -148,3 +150,44 @@ function toggleWordVisibility(wordId) {
         wordInput.type = 'password';
     }
 }
+
+// Hangman parts in order
+const hangmanParts = [
+    document.getElementById('head'),
+    document.getElementById('body'),
+    document.getElementById('left-arm'),
+    document.getElementById('right-arm'),
+    document.getElementById('left-leg'),
+    document.getElementById('right-leg')
+];
+
+// Function to update hangman based on wrong guesses
+function updateHangman(wrongGuessCount) {
+    if (wrongGuessCount <= hangmanParts.length) {
+        hangmanParts[wrongGuessCount - 1].style.display = 'block'; // Show part
+    }
+}
+
+// Reset the hangman for a new game
+function resetHangman() {
+    hangmanParts.forEach(part => {
+        part.style.display = 'none'; // Hide all parts
+    });
+}
+
+// Example usage in your game logic
+let wrongGuessCount = 0;
+
+// Call this function whenever the player makes an incorrect guess
+function wrongGuess() {
+    wrongGuessCount++;
+    updateHangman(wrongGuessCount);
+
+    if (wrongGuessCount === hangmanParts.length) {
+        alert('Game over! Hangman is complete.');
+    }
+}
+
+// Reset the hangman when starting a new game
+resetHangman();
+

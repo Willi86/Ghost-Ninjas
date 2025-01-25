@@ -110,6 +110,19 @@ button:hover {
     top: 0;
     right: 10px;
 }
+
+.hangman-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+#hangman-svg {
+    stroke-linecap: round;
+}
+#hangman-svg line, #hangman-svg circle {
+    transition: opacity 0.5s ease-in-out;
+}
+
 @media (max-width: 600px) {
     .container {
         width: 100%;
