@@ -16,9 +16,11 @@
             <label for="word1">Spelare 1:s Ord för Spelare 2:</label>
             <input type="password" id="word1" name="word1">
             <button type="button" onclick="toggleWordVisibility('word1')">Visa</button>
+            <p id="error-message">Endast bokstäver (inga siffror eller specialtecken) är tillåtna.</p>
             <label for="word2">Spelare 2:s Ord för Spelare 1:</label>
             <input type="password" id="word2" name="word2">
             <button type="button" onclick="toggleWordVisibility('word2')">Visa</button>
+            <p id="error-message">Endast bokstäver (inga siffror eller specialtecken) är tillåtna.</p>
         </div>
         <div class="startGame">
             <button onclick="startGame()">Starta Spelet</button>
@@ -29,6 +31,21 @@
             <input type="text" id="guess-input" name="guess-input" maxlength="1">
             <button onclick="makeGuess()">Gissa</button>
             <p id="word-display"></p>
+            <!-- Hangman SVG -->
+        <div class="hangman-container">
+            <svg id="hangman-svg" width="200" height="250" viewBox="0 0 200 250">
+                <line x1="10" y1="240" x2="150" y2="240" stroke="black" stroke-width="4" />
+                <line x1="50" y1="240" x2="50" y2="20" stroke="black" stroke-width="4" />
+                <line x1="50" y1="20" x2="120" y2="20" stroke="black" stroke-width="4" />
+                <line x1="120" y1="20" x2="120" y2="40" stroke="black" stroke-width="4" />
+                <circle id="head" cx="120" cy="60" r="20" stroke="black" stroke-width="4" fill="none" style="display: none;" />
+                <line id="body" x1="120" y1="80" x2="120" y2="140" stroke="black" stroke-width="4" style="display: none;" />
+                <line id="left-arm" x1="120" y1="100" x2="90" y2="120" stroke="black" stroke-width="4" style="display: none;" />
+                <line id="right-arm" x1="120" y1="100" x2="150" y2="120" stroke="black" stroke-width="4" style="display: none;" />
+                <line id="left-leg" x1="120" y1="140" x2="90" y2="180" stroke="black" stroke-width="4" style="display: none;" />
+                <line id="right-leg" x1="120" y1="140" x2="150" y2="180" stroke="black" stroke-width="4" style="display: none;" />
+            </svg>
+        </div>
             <p id="guessed-letters"></p>
             <p id="hangman-status"></p>
         </div>
