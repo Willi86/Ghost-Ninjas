@@ -1,27 +1,131 @@
-/*body {
-    font-family: Arial, sans-serif;
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
     text-align: center;
-    margin-top: 50px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
 }
 
-.player-input, .game-area {
-    margin-top: 20px;
+h1 {
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #555555;
+    margin-bottom: 15px;
 }
 
 label {
-    margin-right: 10px;
+    display: block;
+    margin: 10px 0 5px;
+    color: #666666;
+    font-weight: bold;
 }
 
-input[type="text"] {
-    margin-bottom: 10px;
-    padding: 5px;
-}*/
+input[type="text"], input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0 10px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
 
-.player-input, .game-area { margin: 20px; }
-        .game-area { display: none; }
-        .word-display { font-size: 24px; letter-spacing: 4px; margin: 20px 0; }
-        .incorrect-guesses { margin: 20px 0; color: red; }
-        .hangman { margin: 20px 0; }
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.game-area p {
+    margin: 10px 0;
+    color: #333333;
+    font-size: 1.1em;
+}
+
+#guessed-letters, #hangman-status {
+    margin: 10px 0;
+    color: #ff3333;
+    font-weight: bold;
+}
+#error-message{
+    color: red;
+     font-style: italic;
+   display: none;
+
+}
+/* Modal Container */
+#error-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed position (sit on top of everything else) */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+    z-index: 1000; /* Make sure it's on top */
+}
+
+/* Modal Content */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+/* Close Button */
+#close-modal {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+.hangman-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+#hangman-svg {
+    stroke-linecap: round;
+}
+#hangman-svg line, #hangman-svg circle {
+    transition: opacity 0.5s ease-in-out;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+}
