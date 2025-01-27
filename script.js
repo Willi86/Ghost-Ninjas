@@ -9,6 +9,18 @@ let hangmanStatus1 = 0;
 let hangmanStatus2 = 0;
 const maxTries = 6;
 
+
+
+function selectGuests() {
+    document.getElementById('player1').value = 'Guest 1';
+    document.getElementById('player2').value = 'Guest 2';
+
+    startGame();
+}
+
+
+
+
 function startGame() {
     player1 = document.getElementById('player1').value;
     player2 = document.getElementById('player2').value;

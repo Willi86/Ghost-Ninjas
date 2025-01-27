@@ -13,6 +13,7 @@
             <input type="text" id="player1" name="player1">
             <label for="player2">Spelare 2 Namn:</label>
             <input type="text" id="player2" name="player2">
+
             <label for="word1">Spelare 1:s Ord för Spelare 2:</label>
             <input type="password" id="word1" name="word1">
             <button type="button" onclick="toggleWordVisibility('word1')">Visa</button>
@@ -20,6 +21,8 @@
             <label for="word2">Spelare 2:s Ord för Spelare 1:</label>
             <input type="password" id="word2" name="word2">
             <button type="button" onclick="toggleWordVisibility('word2')">Visa</button>
+            <button onclick="selectGuests()">Play as Guests</button>
+
             <p id="error-message">Endast bokstäver (inga siffror eller specialtecken) är tillåtna.</p>
         </div>
         <div class="startGame">
